@@ -6,7 +6,7 @@ Test task for Document
 
 ### Prerequisites
 
-You must install python, python-dev and some libs for Pillow.
+You must install python3, python3-dev and some libs for Pillow.
 
 ### Installation
 
