@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% if cart %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Diameter</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total price</th>
+          <th>Add/Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for product in cart %}
+        <tr>
+          <td>{{product.object.name}}</td>
+          <td>{{product.object.diameter}}</td>
+          <td>{{product.object.description}}</td>
+          <td>{{product.object.price}} {{currency}}</td>
+          <td>{{product.quantity}}</td>
+          <td>{{product.total_price}} {{currency}}</td>
+          <td>
+            <a href="{% url 'add_to_cart' product.object.id%}?next=cart_page"><span class="badge badge-success">add</span></a>
+            <a href="{% url 'remove_from_cart' product.object.id%}?next=cart_page"><span class="badge badge-danger">remove</span></a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <h2 class="text-center">Total price: {{cart.total_price}} {{currency}}</h2>
+    <hr>
+    <h2 class="text-center">Checkout</h2>
+    <form action="{% url 'cart_page' %}" method="POST">
+      {% load crispy_forms_tags %}
+      {% crispy form %}
+    </form>
+  {% else %}
+    <h2 class="text-center">Cart is empty</h2>
+  {% endif %}
+{% endblock %}

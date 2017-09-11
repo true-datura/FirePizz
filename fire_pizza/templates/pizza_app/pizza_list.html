@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="row">
+    {% for pizza in object_list %}
+    <div class="card">
+      <img src="{{pizza.photo.url}}" alt="{{pizza.name}}">
+      <p class="card-text">Name: {{pizza.name}}</p>
+      <p class="card-text">Diameter: {{pizza.diameter}}</p>
+      <p class="card-text">Description: {{pizza.description}}</p>
+      <p class="card-text">Price: {{pizza.price}} <strong>{{currency}}</strong></p>
+      <a href="{% url 'add_to_cart' pizza.id %}" class="btn btn-primary">Add to cart</a>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

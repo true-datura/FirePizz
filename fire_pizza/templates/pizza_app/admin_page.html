@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if orders %}
+      <h2 class="text-center">Orders</h2>
+        {% for order in orders %}
+        <ul>
+          <li><strong>Phone: </strong>{{order.phone}}</li>
+          <li><strong>Address: </strong>{{order.address}}</li>
+          <li><strong>Name: </strong>{{order.name}}</li>
+          <li><strong>Create time: </strong>{{order.create_time}}</li>
+          <li><strong>Email: </strong>{{order.email}}</li>
+          <li><strong>Message: </strong>{{order.message}}</li>
+          <li><strong>Status: </strong>{% if order.delivered %}Delivered{% else %}Not delivered{% endif %}</li>
+          {% if order.items.all %}
+          <li>
+            <ul>
+              {% for item in order.items.all %}
+                <li>{{item}}</li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% endif %}
+          <li><strong>Total price: </strong>{{order.total_price}}</li>
+        </ul>
+        <hr>
+        {% endfor %}
+    {% else %}
+      <h2 class="text-center">No Orders</h2>
+    {% endif %}
+{% endblock %}
